@@ -90,5 +90,6 @@ lines
 
 Drop lines uses the `Quixbugs` database created above to create `data/bug_drop` and `data/random_drop`. For each program in the databse, we query the length of the program, and then select a random number between 1 and length to drop. We assert that the line is not the same as the buggy line, and contains code (is != newline character). Then, all lines excluding the one to be dropped are written to `data/random_drop/<program_name>_random_drop#.py`, with an empty line (newline character) written in place of the dropped line. For `data/bug_drop`, we query the buggy line for the program in question, and then re-write the program to this file (with a newline character in place of the bug).  
 
+Test
 
 

@@ -2,7 +2,7 @@
 
 Divided into two main sections: data, and source. `data` contains four sub-repositories each with slightly modified versions of the Python programs from the Quixbugs dataset, and `source` contains the Python scripts used to generate this data. 
 
-## data 
+## Data 
 
 FILE structure:
 
@@ -30,18 +30,19 @@ data
         ......
 ```
 
-### python programs 
+### `python_programs` 
 The initial Python programs from the Quixbugs dataset, which each contain a one-line bug
 
-## trimmed programs
+## `trimmed_programs`
 Each program from `python_programs` with the trailing comments and whitespace removed 
 
-## bug drop 
+## `bug_drop` 
 Each program from `trimmed_programs` with the buggy line removed, line number given in file name
 
-## random drop 
+## `random_drop` 
 Each program from `trimmed_programs` with a random line removed, line number given in file name
 
+# Source
 
 ```
 source 

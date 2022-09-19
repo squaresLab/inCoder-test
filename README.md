@@ -33,13 +33,13 @@ data
 ### `python_programs` 
 The initial Python programs from the Quixbugs dataset, which each contain a one-line bug
 
-## `trimmed_programs`
+### `trimmed_programs`
 Each program from `python_programs` with the trailing comments and whitespace removed 
 
-## `bug_drop` 
+### `bug_drop` 
 Each program from `trimmed_programs` with the buggy line removed, line number given in file name
 
-## `random_drop` 
+### `random_drop` 
 Each program from `trimmed_programs` with a random line removed, line number given in file name
 
 # Source

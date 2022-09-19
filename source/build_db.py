@@ -33,7 +33,7 @@ def get_programs(path):
     return prog_paths
 
 def get_line_data(name):
-    path = "../patch-gen/py-lines/" + name
+    path = "data/py-lines/" + name
     with open(path, "r") as f:
         data = json.load(f)
     buggy_line = data["buggy_line"]

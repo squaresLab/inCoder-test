@@ -8,7 +8,7 @@ def knapsack(capacity, items):
         for j in range(1, capacity + 1):
             memo[i, j] = memo[i - 1, j]
 
-
+            <insert>
                 memo[i, j] = max(
                     memo[i, j],
                     value + memo[i - 1, j - weight]

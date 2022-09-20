@@ -3,7 +3,7 @@ def longest_common_subsequence(a, b):
         return ''
 
     elif a[0] == b[0]:
-
+        <insert>
 
     else:
         return max(

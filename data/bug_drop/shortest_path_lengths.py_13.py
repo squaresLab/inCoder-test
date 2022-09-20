@@ -10,7 +10,7 @@ def shortest_path_lengths(n, length_by_edge):
             for j in range(n):
                 length_by_path[i, j] = min(
                     length_by_path[i, j],
-
+                    <insert>
                 )
 
     return length_by_path

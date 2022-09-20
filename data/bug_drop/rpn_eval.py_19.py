@@ -16,7 +16,7 @@ def rpn_eval(tokens):
             a = stack.pop()
             b = stack.pop()
             stack.append(
-
+                <insert>
             )
 
     return stack.pop()

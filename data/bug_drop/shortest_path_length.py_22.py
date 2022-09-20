@@ -19,7 +19,7 @@ def shortest_path_length(length_by_edge, startnode, goalnode):
             insert_or_update(unvisited_nodes,
                 (min(
                     get(unvisited_nodes, nextnode) or float('inf'),
-
+                    <insert>
                 ),
                 nextnode)
             )

@@ -33,7 +33,9 @@ def write_random_drop(name, rand, rows):
         for row in rows:
             line_num, line = row
             if line_num == rand:
-                f.write("\n")
+                #get the whitespace on LHS of line 
+                whitespace = line[:len(line) - len(line.lstrip())]
+                f.write(whitespace + "<insert>\n")
             else:
                 f.write(line)
 
@@ -42,7 +44,8 @@ def write_bug_drop(name, buggy_line_num, rows):
         for row in rows:
             line_num, line = row
             if line_num == buggy_line_num:
-                f.write("\n")
+                whitespace = line[:len(line) - len(line.lstrip())]
+                f.write(whitespace + "<insert>\n")
             else:
                 f.write(line)
 
@@ -58,6 +61,8 @@ def main():
     make_dir("data/bug_drop")
     for prog in rows:
         id, name, length, line_num = prog
+        if line_num is None: 
+            print(prog)
         #generate a random number between one and length 
         rand = random.randint(1, length)
         is_empty = check_empty(c, conn, id, rand)

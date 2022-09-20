@@ -3,7 +3,7 @@ def topological_ordering(nodes):
 
     for node in ordered_nodes:
         for nextnode in node.outgoing_nodes:
-
+            <insert>
                 ordered_nodes.append(nextnode)
 
     return ordered_nodes

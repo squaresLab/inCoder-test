@@ -12,6 +12,6 @@ def find_first_in_sorted(arr, x):
             hi = mid
 
         else:
-
+            <insert>
 
     return -1

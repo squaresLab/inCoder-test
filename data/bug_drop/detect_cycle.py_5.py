@@ -2,7 +2,7 @@ def detect_cycle(node):
     hare = tortoise = node
 
     while True:
-
+        <insert>
             return False
 
         tortoise = tortoise.successor

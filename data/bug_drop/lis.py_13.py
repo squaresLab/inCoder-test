@@ -10,6 +10,6 @@ def lis(arr):
 
         if length == longest or val < arr[ends[length + 1]]:
             ends[length + 1] = i
-
+            <insert>
 
     return longest

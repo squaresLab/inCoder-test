@@ -48,7 +48,7 @@ def get_code(prog_path):
 def process_lines(code, buggy_line):
     buggy_line_num = None
     for i, line in enumerate(code):
-        if line == buggy_line:
+        if line == buggy_line or line+'\n' == buggy_line:
             buggy_line_num = i+1
             break
     return buggy_line_num

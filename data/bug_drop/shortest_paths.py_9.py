@@ -6,7 +6,7 @@ def shortest_paths(source, weight_by_edge):
 
     for i in range(len(weight_by_node) - 1):
         for (u, v), weight in weight_by_edge.items():
-
+            <insert>
                 weight_by_node[u] + weight,
                 weight_by_node[v]
             )

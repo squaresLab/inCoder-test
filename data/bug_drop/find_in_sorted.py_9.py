@@ -6,7 +6,7 @@ def find_in_sorted(arr, x):
         if x < arr[mid]:
             return binsearch(start, mid)
         elif x > arr[mid]:
-
+            <insert>
         else:
             return mid
 

@@ -1,4 +1,4 @@
-
+<insert>
 def to_base(num, b):
     result = ''
     alphabet = string.digits + string.ascii_uppercase

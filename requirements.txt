@@ -1,0 +1,4 @@
+torch
+tokenizer>=0.12
+transformers
+accelerate

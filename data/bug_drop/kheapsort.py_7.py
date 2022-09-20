@@ -4,7 +4,7 @@ def kheapsort(arr, k):
     heap = arr[:k]
     heapq.heapify(heap)
 
-
+    <insert>
         yield heapq.heappushpop(heap, x)
 
     while heap:

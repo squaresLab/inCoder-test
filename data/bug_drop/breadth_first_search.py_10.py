@@ -7,7 +7,7 @@ def breadth_first_search(startnode, goalnode):
     nodesseen = set()
     nodesseen.add(startnode)
 
-
+    <insert>
         node = queue.popleft()
 
         if node is goalnode:

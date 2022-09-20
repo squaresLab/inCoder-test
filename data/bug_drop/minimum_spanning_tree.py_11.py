@@ -8,6 +8,6 @@ def minimum_spanning_tree(weight_by_edge):
             mst_edges.add(edge)
             group_by_node[u].update(group_by_node[v])
             for node in group_by_node[v]:
-
+                <insert>
 
     return mst_edges

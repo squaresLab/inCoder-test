@@ -1,0 +1,1 @@
+{"text": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        a, b = b, a\n        while b:\n            a, b = b, a % b\n        return a\n", "parts": ["def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        ", "\n"], "infills": ["a, b = b, a\n        while b:\n            a, b = b, a % b\n        return a"], "retries_attempted": 1}

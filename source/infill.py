@@ -1,9 +1,15 @@
 from typing import List
 
+import json
+import os
 import torch
 torch.cuda.empty_cache()
 
+from math import exp, log
+torch.set_printoptions(precision=15)
+
 import tokenizers
+from math import log2
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import json
 tokenizers_version = tuple(int(n) for n in tokenizers.__version__.split('.'))
@@ -73,22 +79,35 @@ def generate(input: str, max_to_generate: int=128, temperature: float=0.2):
         print("warning: max_length {} is greater than the context window {}".format(max_length, 2048))
     with torch.no_grad():
         output = model.generate(input_ids=input_ids, do_sample=True, top_p=0.95, temperature=temperature, max_length=max_length, return_dict_in_generate=True, output_scores=True)
-        print(output["sequences"].shape)
-        print(output["scores"][0].shape)
-        print(len(output["scores"]))
+        #print(output["sequences"].shape)
+        #print(output["scores"][0].shape)
+        #print(len(output["scores"]))
 
-        logprobs = output["scores"][0]
-        print(logprobs.shape)
+        #logprobs = output["scores"][0]
+        #print(logprobs.shape)
 
-        generated_ids = output["sequences"][0, input_ids.size(1):]
-        vocab_size = output["scores"][0].shape[-1]
+        #generated_ids = output["sequences"][0, input_ids.size(1):]
+        #vocab_size = output["scores"][0].shape[-1]
 
-        print(generated_ids)
-        print(vocab_size)
+        #print(generated_ids)
+        #print(vocab_size)
 
-        logprob_gen_token0 = output["scores"][0][0, generated_ids[0]]
-        print(logprob_gen_token0)
-        print(logprob_gen_token0.exp())
+        #logprob_gen_token0 = torch.softmax(output["scores"][0], dim=-1)[0, generated_ids[0]]
+        #print(logprob_gen_token0)
+
+        #logprobs0 = torch.softmax(output["scores"][0], dim=-1)
+        #logprobs1 = torch.softmax(output["scores"][1], dim=-1)
+        #print(logprobs0.sum())
+        #print(logprobs1.sum())
+        #print(logprobs0[0, generated_ids[0]])
+        #print(logprobs1[0, generated_ids[1]])
+
+        #probs = []
+        #for i in range(0, len(generated_ids)):
+            #log_prob = torch.log_softmax(output["scores"][i], dim=-1)[0, generated_ids[i]]
+            ##log_prob = torch.log(token_prob[0, generated_ids[i]])
+            #probs.append(log_prob)
+        #print(probs)
 
 
 
@@ -190,17 +209,56 @@ def infill_code(code, max_to_generate=128, temperature=0.2):
     # this will sometimes generate extra functions! this can be avoided by truncating generation when e.g. a """ is produced
     parts = code.split("<insert>")
     result = infill(parts, max_to_generate=max_to_generate, temperature=temperature)
-    print("completed document:")
-    print(result["text"])
-    return result["text"]
+    #print("completed document:")
+    #print(result["text"])
+    return result
+
+def make_dir(path):
+    if os.path.exists(path):
+        os.system("rm -r " + path)
+    os.mkdir(path)
+
+def get_programs(path):
+    """Return a list of programs in the given path"""
+    prog_paths = []
+    for file in os.listdir(path):
+        if file.endswith(".py"):
+            prog_paths.append(os.path.join(path, file))
+    return prog_paths
 
 if __name__ == "__main__":
-    code = '''\
-    def bitcount(n):
-    count = 0
-    while n:
-        <insert>
-        count += 1
-    return count'''
-    infill_code(code)
-    print()
+
+    make_dir('data/bug_drop_infill')
+    make_dir('data/random_drop_infill')
+
+    path = "data/bug_drop"
+    prog_paths = get_programs(path)
+
+    for prog_path in prog_paths:
+        prog_name = prog_path.split('/')[-1].split('.')[0]
+        with open(prog_path, 'r') as f1:
+            code = f1.read()
+            result = infill_code(code)
+            with open('data/bug_drop_infill/' + prog_path.split('/')[-1], 'w') as f2:
+                json.dump(result, f2)
+    
+    path = "data/random_drop"
+    prog_paths = get_programs(path)
+
+    for prog_path in prog_paths:
+        prog_name = prog_path.split('/')[-1].split('.')[0]
+        with open(prog_path, 'r') as f1:
+            code = f1.read()
+            result = infill_code(code)
+            with open('data/random_drop_infill/' + prog_path.split('/')[-1], 'w') as f2:
+                json.dump(result, f2)
+
+    #code = '''\
+    #def bitcount(n):
+    #count = 0
+    #while n:
+    #    <insert>
+    #    count += 1
+    #return count'''
+    #result = infill_code(code)
+    #print(result)

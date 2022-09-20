@@ -1,0 +1,1 @@
+{"text": "def bitcount(n):\n    count = 0\n    while(n != 0):\n        n ^= n - 1\n        count += 1\n    return count", "parts": ["def bitcount(n):\n    count = 0\n    ", "\n        n ^= n - 1\n        count += 1\n    return count"], "infills": ["while(n != 0):"], "retries_attempted": 1}
